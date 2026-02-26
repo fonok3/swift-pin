@@ -1,0 +1,34 @@
+name: Bug Report
+description: Report a bug in Pin
+labels: [bug]
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: What happened and what did you expect?
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Minimal reproduction
+      description: Paste a minimal code snippet that reproduces the issue.
+      render: swift
+    validations:
+      required: true
+  - type: input
+    id: swift-version
+    attributes:
+      label: Swift version
+      description: Output of `swift --version`.
+      placeholder: "Swift version 6.2"
+    validations:
+      required: true
+  - type: input
+    id: platform
+    attributes:
+      label: Platform
+      placeholder: "macOS 15, Ubuntu 24.04, etc."
+    validations:
+      required: true
