@@ -1,3 +1,7 @@
+[![CI](https://github.com/fonok3/swift-pin/actions/workflows/ci.yml/badge.svg)](https://github.com/fonok3/swift-pin/actions/workflows/ci.yml)
+[![](https://img.shields.io/badge/Swift-5.10%2B-F05138?logo=swift&logoColor=white)](https://swift.org)
+[![](https://img.shields.io/badge/Platforms-iOS%20%7C%20macOS%20%7C%20tvOS%20%7C%20watchOS%20%7C%20visionOS%20%7C%20Linux-blue)]()
+
 # Pin
 
 Opinionated compile-time dependency injection for Swift.
