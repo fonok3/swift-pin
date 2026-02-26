@@ -61,6 +61,11 @@ jobs:
     container: swift:6.2
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/cache@v4
+        with:
+          path: .build
+          key: spm-${{ hashFiles('Package.resolved') }}
+          restore-keys: spm-
       - name: Build
         run: swift build
       - name: Test
