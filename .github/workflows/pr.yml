@@ -4,6 +4,10 @@ on:
   pull_request:
     branches: [main]
 
+concurrency:
+  group: pr-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
 jobs:
   lint-commits:
     runs-on: ubuntu-latest
@@ -52,6 +56,7 @@ jobs:
         run: swift-format lint --strict --recursive Sources Tests
 
   build-and-test:
+    needs: [lint-commits, lint-format]
     runs-on: ubuntu-latest
     container: swift:6.2
     steps:
