@@ -23,7 +23,7 @@ This project uses [Conventional Commits](https://www.conventionalcommits.org/).
 
 **Types:** `feat`, `fix`, `refactor`, `docs`, `test`, `ci`, `chore`, `perf`
 
-**Scopes:** `macro`, `plugin`, `util`, `example`
+**Scopes:** `macro`, `plugin`, `util`, `example`, `deps`
 
 **Examples:**
 

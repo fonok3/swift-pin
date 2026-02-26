@@ -18,7 +18,7 @@ jobs:
       - name: Validate commit messages
         run: |
           types="feat|fix|refactor|docs|test|ci|chore|perf"
-          scopes="macro|plugin|util|example"
+          scopes="macro|plugin|util|example|deps"
           pattern="^(${types})(\((${scopes})\))?!?: .{1,}"
 
           errors=0
@@ -43,7 +43,7 @@ jobs:
             echo "Found $errors commit(s) not matching Conventional Commits."
             echo "  Format:  <type>[(<scope>)][!]: <description>"
             echo "  Types:   feat, fix, refactor, docs, test, ci, chore, perf"
-            echo "  Scopes:  macro, plugin, util, example"
+            echo "  Scopes:  macro, plugin, util, example, deps"
             exit 1
           fi
 
