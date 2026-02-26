@@ -4,7 +4,7 @@
 # Install: git config core.hooksPath .githooks
 #
 # Allowed types:  feat, fix, refactor, docs, test, ci, chore, perf
-# Allowed scopes: macro, plugin, util, example
+# Allowed scopes: macro, plugin, util, example, deps
 # Format:         <type>[(<scope>)][!]: <description>
 
 set -euo pipefail
@@ -18,7 +18,7 @@ if [[ "$msg" =~ ^Merge\  ]] || [[ "$msg" =~ ^Revert\  ]]; then
 fi
 
 types="feat|fix|refactor|docs|test|ci|chore|perf"
-scopes="macro|plugin|util|example"
+scopes="macro|plugin|util|example|deps"
 pattern="^(${types})(\((${scopes})\))?!?: .{1,}"
 
 if ! [[ "$msg" =~ $pattern ]]; then
@@ -27,7 +27,7 @@ if ! [[ "$msg" =~ $pattern ]]; then
     echo ""
     echo "  Format:  <type>[(<scope>)][!]: <description>"
     echo "  Types:   feat, fix, refactor, docs, test, ci, chore, perf"
-    echo "  Scopes:  macro, plugin, util, example"
+    echo "  Scopes:  macro, plugin, util, example, deps"
     echo ""
     echo "  Examples:"
     echo "    feat(macro): add support for protocol dependencies"
