@@ -1,0 +1,63 @@
+#!/usr/bin/env bash
+#
+# Validates commit messages against Conventional Commits.
+# Install: git config core.hooksPath .githooks
+#
+# Allowed types:  feat, fix, refactor, docs, test, ci, chore, perf
+# Allowed scopes: macro, plugin, util, example
+# Format:         <type>[(<scope>)][!]: <description>
+
+set -euo pipefail
+
+msg_file="$1"
+msg=$(head -1 "$msg_file")
+
+# Allow merge commits and revert commits
+if [[ "$msg" =~ ^Merge\  ]] || [[ "$msg" =~ ^Revert\  ]]; then
+    exit 0
+fi
+
+types="feat|fix|refactor|docs|test|ci|chore|perf"
+scopes="macro|plugin|util|example"
+pattern="^(${types})(\((${scopes})\))?!?: .{1,}"
+
+if ! [[ "$msg" =~ $pattern ]]; then
+    echo ""
+    echo "ERROR: Commit message does not follow Conventional Commits."
+    echo ""
+    echo "  Format:  <type>[(<scope>)][!]: <description>"
+    echo "  Types:   feat, fix, refactor, docs, test, ci, chore, perf"
+    echo "  Scopes:  macro, plugin, util, example"
+    echo ""
+    echo "  Examples:"
+    echo "    feat(macro): add support for protocol dependencies"
+    echo "    fix(plugin): resolve cycle detection false positive"
+    echo "    docs: update README installation section"
+    echo "    refactor!: rename AccessLevel to Visibility"
+    echo ""
+    echo "  Your message: $msg"
+    echo ""
+    exit 1
+fi
+
+# Enforce single-line commit messages (no body allowed)
+line_count=$(wc -l < "$msg_file" | tr -d ' ')
+non_empty=$(grep -c '[^[:space:]]' "$msg_file" || true)
+if [[ "$non_empty" -gt 1 ]]; then
+    echo "ERROR: Commit message must be a single line. No body or footer allowed."
+    exit 1
+fi
+
+# Validate description exists after the colon
+desc="${msg#*: }"
+if [[ -z "$desc" ]]; then
+    echo "ERROR: Commit message must have a description after the colon."
+    exit 1
+fi
+
+# Enforce max 75 characters for the description (after "type(scope): ")
+if [[ ${#desc} -gt 75 ]]; then
+    echo "ERROR: Description is ${#desc} characters. Maximum is 75."
+    echo "  Your description: $desc"
+    exit 1
+fi

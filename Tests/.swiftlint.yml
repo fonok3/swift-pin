@@ -1,0 +1,10 @@
+parent_config: ../.swiftlint.yml
+disabled_rules:
+  - force_cast
+  - no_magic_numbers
+  - force_try
+  - trailing_closure
+
+line_length:
+  warning: 200
+  ignores_comments: true

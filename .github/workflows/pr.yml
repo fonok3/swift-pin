@@ -1,0 +1,62 @@
+name: PR
+
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  lint-commits:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Validate commit messages
+        run: |
+          types="feat|fix|refactor|docs|test|ci|chore|perf"
+          scopes="macro|plugin|util|example"
+          pattern="^(${types})(\((${scopes})\))?!?: .{1,}"
+
+          errors=0
+          while IFS= read -r msg; do
+            if [[ "$msg" =~ ^Merge\  ]] || [[ "$msg" =~ ^Revert\  ]]; then
+              continue
+            fi
+            if ! [[ "$msg" =~ $pattern ]]; then
+              echo "::error::Bad commit message: $msg"
+              errors=$((errors + 1))
+              continue
+            fi
+            desc="${msg#*: }"
+            if [[ ${#desc} -gt 75 ]]; then
+              echo "::error::Description too long (${#desc} chars, max 75): $msg"
+              errors=$((errors + 1))
+            fi
+          done < <(git log --format='%s' origin/main..HEAD)
+
+          if [[ $errors -gt 0 ]]; then
+            echo ""
+            echo "Found $errors commit(s) not matching Conventional Commits."
+            echo "  Format:  <type>[(<scope>)][!]: <description>"
+            echo "  Types:   feat, fix, refactor, docs, test, ci, chore, perf"
+            echo "  Scopes:  macro, plugin, util, example"
+            exit 1
+          fi
+
+  lint-format:
+    runs-on: ubuntu-latest
+    container: swift:6.2
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check formatting
+        run: swift-format lint --strict --recursive Sources Tests
+
+  build-and-test:
+    runs-on: ubuntu-latest
+    container: swift:6.2
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build
+        run: swift build
+      - name: Test
+        run: swift test
