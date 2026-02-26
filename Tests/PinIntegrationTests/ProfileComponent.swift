@@ -1,6 +1,7 @@
 import Pin
 
 /// An internal subcomponent that needs `Config` from its parent.
+///
 /// `Config` is internal, so it flows through `InternalProviding`.
 @PinComponent(Config.self)
 @MainActor

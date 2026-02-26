@@ -57,7 +57,7 @@ public func escapedIfKeyword(_ name: String) -> String {
     SwiftKeywords.all.contains(name) ? "`\(name)`" : name
 }
 
-/// Does not handle backtick-escaped keywords (e.g. `` `default` ``).
+/// Does not handle backtick-escaped keywords such as `` `default` ``.
 public func isValidSwiftIdentifier(_ string: String) -> Bool {
     guard let first = string.first,
         first == "_" || first.isLetter
