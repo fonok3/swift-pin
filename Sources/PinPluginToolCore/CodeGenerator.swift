@@ -22,7 +22,7 @@ public struct CodeGenerator {
 
     // MARK: Functions
 
-    /// Detects circular subcomponent relationships (e.g. A → B → A).
+    /// Detects circular subcomponent relationships such as A → B → A.
     ///
     /// Returns error messages for each cycle found, or an empty array.
     public func detectCycles() -> [String] {
