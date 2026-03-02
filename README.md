@@ -139,16 +139,16 @@ Pin's tradeoff: it requires `@MainActor` classes and an acyclic component tree. 
 
 ## Performance
 
-**Runtime:** Nothing from Pin ships in your binary. The generated protocols and forwarding properties are inlined by the compiler. No allocations, no containers, no dynamic dispatch.
+**Runtime:** No framework code from Pin ships in your binary. The generated protocols and forwarding properties are thin wiring — no allocations, no containers, no service locators.
 
-**Build time:** Two additions per target: a macro expansion (in-process, generates declarations) and a build plugin (separate process, parses source files, writes one `PinGenerated.swift`). The plugin walks the AST without type-checking. Neither step scales with project size, only with the number of `@PinComponent` classes in the target.
+**Build time:** Two additions per target: a macro expansion (in-process, generates declarations) and a build plugin (separate process, parses source files, writes one `PinGenerated.swift`). The plugin walks the AST without type-checking. Generation scales with the number of `@PinComponent` classes in the target.
 
 ## Requirements
 
 - Swift 5.10+
 - Apple platforms: iOS 13+, macOS 10.15+, tvOS 13+, watchOS 6+, visionOS 1+
 - Linux is supported (SwiftSyntax and Foundation work on Linux via swift-corelibs-foundation)
-- Pin is compile-time only -- it adds no runtime code to your binary.
+- Pin is compile-time only — no framework code ships in your binary.
 
 ## Installation
 
