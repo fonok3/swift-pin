@@ -285,14 +285,14 @@ enum ComponentScannerTests {
         }
     }
 
-    // MARK: Provider Parsing
+    // MARK: From (Unowned Components)
 
-    struct Provider {
+    struct From {
         @Test
-        func shorthandWithProvider() {
+        func shorthandWithFrom() {
             let scanner = scan(
                 """
-                @PinComponent(Logger.self, provider: AppComponent.self)
+                @PinComponent(Logger.self, from: AppComponent.self)
                 public class CarPlayComponent {
                 }
                 """
@@ -302,14 +302,14 @@ enum ComponentScannerTests {
             let component = scanner.components[0]
             #expect(component.dependencies.count == 1)
             #expect(component.dependencies[0].name == "logger")
-            #expect(component.provider == "AppComponent")
+            #expect(component.dependencySource == "AppComponent")
         }
 
         @Test
-        func verboseWithProvider() {
+        func verboseWithFrom() {
             let scanner = scan(
                 """
-                @PinComponent(dependencies: [PinDependency(Logger.self)], provider: AppComponent.self)
+                @PinComponent(dependencies: [PinDependency(Logger.self)], from: AppComponent.self)
                 public class CarPlayComponent {
                 }
                 """
@@ -317,11 +317,11 @@ enum ComponentScannerTests {
             #expect(scanner.errors.isEmpty)
             let component = scanner.components[0]
             #expect(component.dependencies.count == 1)
-            #expect(component.provider == "AppComponent")
+            #expect(component.dependencySource == "AppComponent")
         }
 
         @Test
-        func noProviderReturnsNil() {
+        func noFromReturnsNil() {
             let scanner = scan(
                 """
                 @PinComponent(Logger.self)
@@ -330,11 +330,11 @@ enum ComponentScannerTests {
                 """
             )
             #expect(scanner.errors.isEmpty)
-            #expect(scanner.components[0].provider == nil)
+            #expect(scanner.components[0].dependencySource == nil)
         }
 
         @Test
-        func rootComponentHasNoProvider() {
+        func rootComponentHasNoFrom() {
             let scanner = scan(
                 """
                 @PinComponent
@@ -344,7 +344,7 @@ enum ComponentScannerTests {
                 """
             )
             #expect(scanner.errors.isEmpty)
-            #expect(scanner.components[0].provider == nil)
+            #expect(scanner.components[0].dependencySource == nil)
         }
     }
 }

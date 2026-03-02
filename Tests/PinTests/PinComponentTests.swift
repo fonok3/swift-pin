@@ -523,11 +523,11 @@ enum PinComponentTests {
         }
     }
 
-    struct ProviderPassthrough {
+    struct FromPassthrough {
         @Test
-        func shorthandWithProvider() {
+        func shorthandWithFrom() {
             let source =
-                "@PinComponent(Logger.self, provider: AppComponent.self)\n@MainActor public final class CarPlayComponent {\n}"
+                "@PinComponent(Logger.self, from: AppComponent.self)\n@MainActor public final class CarPlayComponent {\n}"
             assertMacroExpansion(
                 source,
                 expandedSource: """
@@ -555,9 +555,9 @@ enum PinComponentTests {
         }
 
         @Test
-        func verboseWithProvider() {
+        func verboseWithFrom() {
             let source =
-                "@PinComponent(dependencies: [PinDependency(Logger.self)], provider: AppComponent.self)\n@MainActor public final class CarPlayComponent {\n}"
+                "@PinComponent(dependencies: [PinDependency(Logger.self)], from: AppComponent.self)\n@MainActor public final class CarPlayComponent {\n}"
             assertMacroExpansion(
                 source,
                 expandedSource: """

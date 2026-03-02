@@ -10,7 +10,7 @@ import Testing
 
 let testMacros: [String: Macro.Type] = [
     "PinComponent": PinComponentMacro.self,
-    "PinSubcomponent": PinSubcomponentMacro.self,
+    "PinSubcomponent": PinSubcomponentMacro.self
 ]
 
 /// Expands macros in `originalSource` and compares the result against `expectedExpandedSource`.

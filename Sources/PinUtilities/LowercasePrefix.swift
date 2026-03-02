@@ -49,7 +49,7 @@ private enum SwiftKeywords {
         "as", "any", "false", "is", "nil", "super",
         "self", "Self", "throws", "true", "try",
         // Patterns
-        "_",
+        "_"
     ]
 }
 

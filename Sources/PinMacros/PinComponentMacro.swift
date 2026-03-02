@@ -211,7 +211,7 @@ public struct PinComponentMacro: PeerMacro, MemberMacro {
         var deps: [ParsedDependency] = []
         var seenNames: Set<String> = []
         for arg in arguments {
-            // Skip labeled arguments (e.g. `provider:`) — they're handled elsewhere
+            // Skip labeled arguments (e.g. `from:`) — they're handled elsewhere
             if arg.label != nil {
                 continue
             }

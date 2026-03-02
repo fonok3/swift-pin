@@ -76,7 +76,7 @@ import Pin
 }
 ```
 
-`@PinSubcomponent` generates a lazy backing store and injects `self` as the dependency. The property must be a plain `var` with a type annotation, no `lazy`, no initializer.
+`@PinSubcomponent` creates and owns the child component lazily. The property must be a plain `var` with a type annotation — no `lazy`, no initializer.
 
 For named dependencies (multiple instances of the same type), use the verbose form:
 
@@ -84,25 +84,33 @@ For named dependencies (multiple instances of the same type), use the verbose fo
 @PinComponent(dependencies: [PinDependency(Logger.self, named: "networkLogger")])
 ```
 
-### Providers
+### Unowned Components
 
-Not every component needs to be a `@PinSubcomponent`. Use `provider:` for components whose lifetime you manage yourself:
+`@PinSubcomponent` ties a child's lifetime to its parent — created lazily, destroyed together. Sometimes you need a component whose lifetime you control yourself. Use `from:` to tell Pin where the dependencies come from without creating a parent-child relationship:
 
 ```swift
-@PinComponent(Logger.self, provider: AppComponent.self)
+@PinComponent(Logger.self, from: AppComponent.self)
 @MainActor public final class CarPlayComponent {
     public lazy var dashboard = CarPlayDashboard(logger: dependency.logger)
 }
 ```
 
-Pin generates `extension AppComponent: CarPlayComponentDependency {}` so you can create the component manually:
+Pin generates `extension AppComponent: CarPlayComponentDependency {}` so you can create and destroy the component on your own terms:
 
 ```swift
-// You control the lifetime: create and destroy as needed
+// You control the lifetime
 carPlayComponent = CarPlayComponent(dependency: appComponent)
+carPlayComponent = nil // gone — no impact on AppComponent
 ```
 
-Both `@PinSubcomponent` and `provider:` are compile-time safe. The difference is ownership: `@PinSubcomponent` ties the child's lifetime to the parent, `provider:` leaves it to you.
+Both approaches are compile-time safe. Here's how they compare:
+
+| | Root | Subcomponent | Unowned |
+|---|---|---|---|
+| Declaration | `@PinComponent` | `@PinComponent(T.self)` | `@PinComponent(…, from: X.self)` |
+| Wiring | none | `@PinSubcomponent var child: C` | `C(dependency: x)` |
+| Lifetime | you manage | tied to parent | you manage |
+| Dependencies | none | implicit from parent | explicit via `from:` |
 
 ## Testing
 

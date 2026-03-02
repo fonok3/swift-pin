@@ -5,6 +5,6 @@ import SwiftSyntaxMacros
 struct PinMacrosPlugin: CompilerPlugin {
     let providingMacros: [Macro.Type] = [
         PinComponentMacro.self,
-        PinSubcomponentMacro.self,
+        PinSubcomponentMacro.self
     ]
 }

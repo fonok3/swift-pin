@@ -10,7 +10,7 @@ public struct ComponentInfo: Equatable, Sendable {
     public let internalProperties: [PropertyInfo]
     public let subcomponents: [SubcomponentInfo]
     public let dependencies: [PropertyInfo]
-    public let provider: String?
+    public let dependencySource: String?
 
     // MARK: Lifecycle
 
@@ -21,7 +21,7 @@ public struct ComponentInfo: Equatable, Sendable {
         internalProperties: [PropertyInfo] = [],
         subcomponents: [SubcomponentInfo],
         dependencies: [PropertyInfo] = [],
-        provider: String? = nil
+        dependencySource: String? = nil
     ) {
         self.className = className
         self.accessLevel = accessLevel
@@ -29,6 +29,6 @@ public struct ComponentInfo: Equatable, Sendable {
         self.internalProperties = internalProperties
         self.subcomponents = subcomponents
         self.dependencies = dependencies
-        self.provider = provider
+        self.dependencySource = dependencySource
     }
 }

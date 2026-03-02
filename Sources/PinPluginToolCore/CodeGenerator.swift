@@ -175,10 +175,10 @@ public struct CodeGenerator {
             lines.append("}")
         }
 
-        // 6. Provider conformance extension
-        if let provider = component.provider {
+        // 6. Unowned component conformance extension
+        if let dependencySource = component.dependencySource {
             lines.append("")
-            lines.append("@MainActor extension \(provider): \(component.className)Dependency {}")
+            lines.append("@MainActor extension \(dependencySource): \(component.className)Dependency {}")
         }
 
         // 7. Subcomponent accessor extensions — split by tier
@@ -225,7 +225,7 @@ public struct CodeGenerator {
         return [
             "@MainActor \(access)protocol \(component.className)Providing\(inheritance) {",
             "    var \(accessor): \(component.className) { get }",
-            "}",
+            "}"
         ]
     }
 

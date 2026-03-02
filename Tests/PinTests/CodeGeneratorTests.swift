@@ -56,7 +56,7 @@ struct CodeGeneratorTests {
                         properties: [],
                         subcomponents: [
                             SubcomponentInfo(propertyName: "one", typeName: "OneComponent"),
-                            SubcomponentInfo(propertyName: "two", typeName: "TwoComponent"),
+                            SubcomponentInfo(propertyName: "two", typeName: "TwoComponent")
                         ]
                     )
                 ],
@@ -131,7 +131,7 @@ struct CodeGeneratorTests {
                         accessLevel: .public,
                         properties: [
                             PropertyInfo(name: "logger", type: "Logger"),
-                            PropertyInfo(name: "analytics", type: "Analytics"),
+                            PropertyInfo(name: "analytics", type: "Analytics")
                         ],
                         subcomponents: []
                     )
@@ -345,7 +345,7 @@ struct CodeGeneratorTests {
                         ],
                         subcomponents: [
                             SubcomponentInfo(propertyName: "featureOne", typeName: "FeatureOneComponent"),
-                            SubcomponentInfo(propertyName: "featureTwo", typeName: "FeatureTwoComponent"),
+                            SubcomponentInfo(propertyName: "featureTwo", typeName: "FeatureTwoComponent")
                         ]
                     )
                 ],
@@ -394,7 +394,7 @@ struct CodeGeneratorTests {
                         subcomponents: [],
                         dependencies: [
                             PropertyInfo(name: "logger", type: "Logger"),
-                            PropertyInfo(name: "httpClient", type: "HTTPClient"),
+                            PropertyInfo(name: "httpClient", type: "HTTPClient")
                         ]
                     )
                 ],
@@ -419,7 +419,7 @@ struct CodeGeneratorTests {
         }
     }
 
-    struct ProviderConformance {
+    struct UnownedConformance {
         @Test
         func generated() {
             let gen = CodeGenerator(
@@ -432,7 +432,7 @@ struct CodeGeneratorTests {
                         dependencies: [
                             PropertyInfo(name: "logger", type: "Logger")
                         ],
-                        provider: "AppComponent"
+                        dependencySource: "AppComponent"
                     )
                 ],
                 imports: []
@@ -442,7 +442,7 @@ struct CodeGeneratorTests {
         }
 
         @Test
-        func skippedWhenNoProvider() {
+        func skippedWhenNoFrom() {
             let gen = CodeGenerator(
                 components: [
                     ComponentInfo(
@@ -462,7 +462,7 @@ struct CodeGeneratorTests {
         }
 
         @Test
-        func fullOutputWithProvider() {
+        func fullOutputWithFrom() {
             let gen = CodeGenerator(
                 components: [
                     ComponentInfo(
@@ -475,7 +475,7 @@ struct CodeGeneratorTests {
                         dependencies: [
                             PropertyInfo(name: "logger", type: "Logger")
                         ],
-                        provider: "AppComponent"
+                        dependencySource: "AppComponent"
                     )
                 ],
                 imports: ["import Pin"]
@@ -581,7 +581,7 @@ struct CodeGeneratorTests {
                         ],
                         internalProperties: [
                             PropertyInfo(name: "config", type: "AppConfig"),
-                            PropertyInfo(name: "cache", type: "Cache"),
+                            PropertyInfo(name: "cache", type: "Cache")
                         ],
                         subcomponents: [
                             SubcomponentInfo(propertyName: "child", typeName: "ChildComponent")
@@ -642,7 +642,7 @@ struct CodeGeneratorTests {
                         accessLevel: .internal,
                         properties: [],
                         subcomponents: [SubcomponentInfo(propertyName: "a", typeName: "AComponent")]
-                    ),
+                    )
                 ],
                 imports: []
             )
@@ -673,7 +673,7 @@ struct CodeGeneratorTests {
                         accessLevel: .internal,
                         properties: [],
                         subcomponents: [SubcomponentInfo(propertyName: "a", typeName: "AComponent")]
-                    ),
+                    )
                 ],
                 imports: []
             )
@@ -697,7 +697,7 @@ struct CodeGeneratorTests {
                         accessLevel: .internal,
                         properties: [],
                         subcomponents: []
-                    ),
+                    )
                 ],
                 imports: []
             )

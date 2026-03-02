@@ -61,7 +61,7 @@ public final class ComponentScanner: SyntaxVisitor {
         }
 
         let dependencies = parseDependencies(from: pinAttr)
-        let provider = parseProvider(from: pinAttr)
+        let dependencySource = parseDependencySource(from: pinAttr)
 
         components.append(
             ComponentInfo(
@@ -71,7 +71,7 @@ public final class ComponentScanner: SyntaxVisitor {
                 internalProperties: internalProperties,
                 subcomponents: subcomponents,
                 dependencies: dependencies,
-                provider: provider
+                dependencySource: dependencySource
             )
         )
 
@@ -236,11 +236,11 @@ public final class ComponentScanner: SyntaxVisitor {
         return deps
     }
 
-    /// Parses the provider argument from `@PinComponent(..., provider: AppComponent.self)`.
-    private func parseProvider(from attr: AttributeSyntax) -> String? {
+    /// Parses the `from:` argument from `@PinComponent(..., from: AppComponent.self)`.
+    private func parseDependencySource(from attr: AttributeSyntax) -> String? {
         guard let arguments = attr.arguments?.as(LabeledExprListSyntax.self),
-            let providerArg = arguments.first(where: { $0.label?.text == "provider" }),
-            let memberAccess = providerArg.expression.as(MemberAccessExprSyntax.self),
+            let fromArg = arguments.first(where: { $0.label?.text == "from" }),
+            let memberAccess = fromArg.expression.as(MemberAccessExprSyntax.self),
             memberAccess.declName.baseName.text == "self",
             let base = memberAccess.base?.as(DeclReferenceExprSyntax.self)
         else {

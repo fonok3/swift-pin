@@ -1,6 +1,10 @@
-/// Used with the verbose `dependencies:` form for named overrides.
+/// Compile-time marker for named dependency declarations.
+///
+/// The `@PinComponent` macro reads these declarations from source text at
+/// compile time. The values are not retained at runtime.
 ///
 /// For simple cases, prefer the shorthand: `@PinComponent(Logger.self)`.
+/// Use `PinDependency` only when you need `named:` overrides.
 ///
 /// ```swift
 /// // Shorthand (preferred)
