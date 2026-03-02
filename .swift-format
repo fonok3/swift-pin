@@ -12,6 +12,7 @@
   "lineBreakBetweenDeclarationAttributes": true,
   "indentConditionalCompilationBlocks": true,
   "indentSwitchCaseLabels": false,
+  "multiElementCollectionTrailingCommas": false,
   "multilineTrailingCommaBehavior": "neverUsed",
   "lineBreakAroundMultilineExpressionChainComponents": false,
   "fileScopedDeclarationPrivacy": {
