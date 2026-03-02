@@ -2,15 +2,11 @@ import PinUtilities
 import SwiftSyntax
 
 public final class ComponentScanner: SyntaxVisitor {
-    // MARK: Properties
-
     public var components: [ComponentInfo] = []
     public var imports: [String] = []
     public var errors: [String] = []
 
     private var typeNestingDepth = 0
-
-    // MARK: Overridden Functions
 
     override public func visit(_ node: ImportDeclSyntax) -> SyntaxVisitorContinueKind {
         imports.append(node.trimmedDescription)
@@ -99,8 +95,6 @@ public final class ComponentScanner: SyntaxVisitor {
     override public func visitPost(_: EnumDeclSyntax) {
         typeNestingDepth -= 1
     }
-
-    // MARK: Functions
 
     private func processBinding(
         _ binding: PatternBindingSyntax,

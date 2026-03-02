@@ -3,8 +3,6 @@ import SwiftDiagnostics
 enum MainActorDiagnostic: DiagnosticMessage {
     case missingMainActor
 
-    // MARK: Computed Properties
-
     var severity: DiagnosticSeverity {
         .error
     }

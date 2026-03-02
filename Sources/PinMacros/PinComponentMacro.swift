@@ -5,14 +5,10 @@ import SwiftSyntaxBuilder
 import SwiftSyntaxMacros
 
 public struct PinComponentMacro: PeerMacro, MemberMacro {
-    // MARK: Nested Types
-
     struct ParsedDependency {
         let type: String
         let name: String?
     }
-
-    // MARK: Static Functions
 
     public static func expansion(
         of node: AttributeSyntax,

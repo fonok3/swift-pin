@@ -1,8 +1,6 @@
 import PinUtilities
 
 public struct ComponentInfo: Equatable, Sendable {
-    // MARK: Properties
-
     public let className: String
     public let accessLevel: AccessLevel
     public let properties: [PropertyInfo]
@@ -11,8 +9,6 @@ public struct ComponentInfo: Equatable, Sendable {
     public let subcomponents: [SubcomponentInfo]
     public let dependencies: [PropertyInfo]
     public let dependencySource: String?
-
-    // MARK: Lifecycle
 
     public init(
         className: String,

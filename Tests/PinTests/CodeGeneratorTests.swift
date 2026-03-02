@@ -3,8 +3,6 @@ import PinUtilities
 import Testing
 
 struct CodeGeneratorTests {
-    // MARK: Nested Types
-
     struct ProvidingProtocol {
         @Test
         func generated() {
@@ -704,8 +702,6 @@ struct CodeGeneratorTests {
             #expect(gen.detectCycles().isEmpty)
         }
     }
-
-    // MARK: Functions
 
     @Test
     func noComponentsGeneratesPlaceholder() {

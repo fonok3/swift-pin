@@ -12,8 +12,6 @@ enum PinDiagnostic: DiagnosticMessage {
     case unparsableDependency
     case uninitializedStoredProperty
 
-    // MARK: Computed Properties
-
     var severity: DiagnosticSeverity {
         .error
     }

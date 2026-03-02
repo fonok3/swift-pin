@@ -4,13 +4,9 @@ import SwiftParser
 
 @main
 struct PinPluginTool {
-    // MARK: Nested Types
-
     struct ToolError: Error, CustomStringConvertible {
         let description: String
     }
-
-    // MARK: Static Functions
 
     static func main() throws {
         let args = Array(CommandLine.arguments.dropFirst())

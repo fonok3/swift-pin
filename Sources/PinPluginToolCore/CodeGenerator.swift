@@ -1,14 +1,10 @@
 import PinUtilities
 
 public struct CodeGenerator {
-    // MARK: Properties
-
     private let components: [ComponentInfo]
     private let imports: [String]
     /// Lookup from class name to component info for subcomponent access level resolution.
     private let componentsByName: [String: ComponentInfo]
-
-    // MARK: Lifecycle
 
     public init(components: [ComponentInfo], imports: [String]) {
         self.components = components
@@ -19,8 +15,6 @@ public struct CodeGenerator {
         }
         self.componentsByName = map
     }
-
-    // MARK: Functions
 
     /// Detects circular subcomponent relationships such as A → B → A.
     ///

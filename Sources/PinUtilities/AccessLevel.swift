@@ -7,8 +7,6 @@ public enum AccessLevel: Equatable, Sendable {
     case `fileprivate`
     case `private`
 
-    // MARK: Computed Properties
-
     /// Keyword prefix for generated declarations.
     ///
     /// Empty for `internal` (implicit default).

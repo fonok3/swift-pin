@@ -3,14 +3,10 @@ import SwiftSyntax
 import SwiftSyntaxMacros
 
 public struct PinSubcomponentMacro: AccessorMacro {
-    // MARK: Nested Types
-
     struct ParsedSubcomponent {
         let propertyName: String
         let typeName: String
     }
-
-    // MARK: Static Functions
 
     public static func expansion(
         of node: AttributeSyntax,
@@ -45,8 +41,6 @@ public struct PinSubcomponentMacro: AccessorMacro {
         let typeName = typeAnnotation.type.trimmedDescription
         return ParsedSubcomponent(propertyName: propertyName, typeName: typeName)
     }
-
-    // MARK: Private
 
     private static func validateAndDiagnose(
         _ node: AttributeSyntax,

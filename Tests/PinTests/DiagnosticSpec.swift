@@ -1,16 +1,12 @@
 import SwiftDiagnostics
 
 struct DiagnosticSpec {
-    // MARK: Properties
-
     let id: MessageID?
     let message: String
     let line: Int
     let column: Int
     let severity: DiagnosticSeverity
     let fixIts: [FixItSpec]
-
-    // MARK: Lifecycle
 
     init(
         id: MessageID? = nil,
