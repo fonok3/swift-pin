@@ -15,7 +15,7 @@ jobs:
   lint-commits:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           fetch-depth: 0
       - name: Validate commit messages
@@ -54,7 +54,7 @@ jobs:
     runs-on: ubuntu-latest
     container: swift:6.2
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - name: Check formatting
         run: swift-format lint --strict --recursive Sources Tests
 
@@ -63,7 +63,7 @@ jobs:
     runs-on: ubuntu-latest
     container: swift:6.2
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - uses: actions/cache@v6
         with:
           path: .build
